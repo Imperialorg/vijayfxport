@@ -109,92 +109,288 @@ nav, section, footer {
     filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.3));
 }
 
-/* Chip Styling */
-.chip {
-    fill: var(--dark-bg);
+/* Camera Lens Styling */
+.lens-outer {
     stroke: var(--primary-color);
-    stroke-width: 2;
-    animation: chipGlow 2s ease-in-out infinite;
+    animation: lensGlow 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px var(--primary-color));
 }
 
-@keyframes chipGlow {
+@keyframes lensGlow {
     0%, 100% { 
-        filter: drop-shadow(0 0 5px rgba(14, 165, 233, 0.5));
+        opacity: 0.8;
+        filter: drop-shadow(0 0 5px var(--primary-color));
     }
     50% { 
-        filter: drop-shadow(0 0 20px rgba(14, 165, 233, 1));
+        opacity: 1;
+        filter: drop-shadow(0 0 15px var(--primary-color));
     }
 }
 
-.chip-dot {
-    fill: var(--primary-color);
-    animation: dotPulse 1s ease-in-out infinite;
+.lens-ring {
+    stroke: var(--primary-color);
+    animation: ringPulse 2s ease-in-out infinite 0.3s;
 }
 
-@keyframes dotPulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+@keyframes ringPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
 }
 
-.chip-text {
+/* Aperture Blades */
+.aperture-blades {
+    transform-origin: 400px 300px;
+}
+
+.aperture-blade {
+    fill: var(--dark-bg);
+    stroke: var(--primary-color);
+    stroke-width: 1.5;
+    opacity: 0;
+    animation: bladeOpen 1.5s ease-out forwards;
+    transform-origin: 400px 300px;
+}
+
+.blade-1 { animation-delay: 0.5s; }
+.blade-2 { animation-delay: 0.6s; }
+.blade-3 { animation-delay: 0.7s; }
+.blade-4 { animation-delay: 0.8s; }
+.blade-5 { animation-delay: 0.9s; }
+.blade-6 { animation-delay: 1s; }
+
+@keyframes bladeOpen {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+}
+
+.lens-center {
+    fill: rgba(0, 255, 255, 0.1);
+    animation: centerPulse 2s ease-in-out infinite 1.2s;
+}
+
+@keyframes centerPulse {
+    0%, 100% { 
+        fill: rgba(0, 255, 255, 0.1);
+        r: 28;
+    }
+    50% { 
+        fill: rgba(0, 255, 255, 0.3);
+        r: 30;
+    }
+}
+
+/* Light Rays */
+.light-rays {
+    transform-origin: 400px 300px;
+}
+
+.light-ray {
+    stroke: #00ffff;
+    stroke-width: 2;
+    filter: drop-shadow(0 0 3px #00ffff);
+}
+
+.ray-1 { animation: rayBurst 0.8s ease-out forwards 1.8s; }
+.ray-2 { animation: rayBurst 0.8s ease-out forwards 1.85s; }
+.ray-3 { animation: rayBurst 0.8s ease-out forwards 1.9s; }
+.ray-4 { animation: rayBurst 0.8s ease-out forwards 1.95s; }
+.ray-5 { animation: rayBurst 0.8s ease-out forwards 2s; }
+.ray-6 { animation: rayBurst 0.8s ease-out forwards 2.05s; }
+
+@keyframes rayBurst {
+    0% {
+        opacity: 0;
+        stroke-width: 0;
+    }
+    30% {
+        opacity: 1;
+        stroke-width: 3;
+    }
+    100% {
+        opacity: 0;
+        stroke-width: 1;
+    }
+}
+
+.lens-text {
     fill: var(--primary-color);
     font-family: 'Bebas Neue', sans-serif;
     font-size: 24px;
     text-anchor: middle;
     dominant-baseline: middle;
-    letter-spacing: 2px;
-    animation: textFlicker 3s ease-in-out infinite;
+    letter-spacing: 3px;
+    opacity: 0;
+    animation: textFadeIn 0.5s ease-out forwards 1.5s;
 }
 
-@keyframes textFlicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-}
-
-/* Circuit Paths */
-.circuit-path {
-    fill: none;
-    stroke: var(--primary-color);
-    stroke-width: 2;
-    opacity: 0.6;
-}
-
-.path-1 { animation: drawPath 1.5s ease-out forwards 0.2s; }
-.path-2 { animation: drawPath 1.5s ease-out forwards 0.3s; }
-.path-3 { animation: drawPath 1.5s ease-out forwards 0.4s; }
-.path-4 { animation: drawPath 1.5s ease-out forwards 0.5s; }
-.path-5 { animation: drawPath 1.5s ease-out forwards 0.6s; }
-.path-6 { animation: drawPath 1.5s ease-out forwards 0.7s; }
-.path-7 { animation: drawPath 1.5s ease-out forwards 0.8s; }
-.path-8 { animation: drawPath 1.5s ease-out forwards 0.9s; }
-
-@keyframes drawPath {
-    to {
-        stroke-dashoffset: 0;
+@keyframes textFadeIn {
+    to { 
         opacity: 1;
     }
 }
 
-/* Path Endpoints */
-.path-endpoint {
-    fill: var(--primary-color);
+/* Film Strip & Motion Path Styling */
+.film-strip {
+    fill: var(--dark-bg);
+    stroke: var(--primary-color);
+    stroke-width: 2;
     opacity: 0;
-    animation: endpointAppear 0.5s ease-out forwards;
+    animation: filmAppear 0.5s ease-out forwards;
+    filter: drop-shadow(0 0 3px rgba(14, 165, 233, 0.4));
 }
 
-.ep-1 { animation-delay: 1.7s; }
-.ep-2 { animation-delay: 1.8s; }
-.ep-3 { animation-delay: 1.9s; }
-.ep-4 { animation-delay: 2.0s; }
-.ep-5 { animation-delay: 2.1s; }
-.ep-6 { animation-delay: 2.2s; }
-.ep-7 { animation-delay: 2.3s; }
-.ep-8 { animation-delay: 2.4s; }
+.film-frame {
+    opacity: 0;
+    animation: frameFill 0.3s ease-out forwards;
+}
 
-@keyframes endpointAppear {
+.film-hole {
+    fill: var(--primary-color);
+    opacity: 0;
+    animation: holeGlow 0.2s ease-out forwards;
+}
+
+/* Staggered animations for each path */
+.path-1 .film-strip { animation-delay: 1.7s; }
+.path-1 .film-frame.frame-1 { animation-delay: 1.95s; }
+.path-1 .film-frame.frame-2 { animation-delay: 2.0s; }
+.path-1 .film-frame.frame-3 { animation-delay: 2.05s; }
+.path-1 .film-frame.frame-4 { animation-delay: 2.1s; }
+.path-1 .film-frame.frame-5 { animation-delay: 2.15s; }
+.path-1 .film-hole { animation-delay: 2.2s; }
+
+.path-2 .film-strip { animation-delay: 1.8s; }
+.path-2 .film-frame.frame-1 { animation-delay: 2.05s; }
+.path-2 .film-frame.frame-2 { animation-delay: 2.1s; }
+.path-2 .film-frame.frame-3 { animation-delay: 2.15s; }
+.path-2 .film-frame.frame-4 { animation-delay: 2.2s; }
+.path-2 .film-frame.frame-5 { animation-delay: 2.25s; }
+.path-2 .film-hole { animation-delay: 2.3s; }
+
+.path-3 .film-strip { animation-delay: 1.9s; }
+.path-3 .film-frame.frame-1 { animation-delay: 2.15s; }
+.path-3 .film-frame.frame-2 { animation-delay: 2.2s; }
+.path-3 .film-frame.frame-3 { animation-delay: 2.25s; }
+.path-3 .film-frame.frame-4 { animation-delay: 2.3s; }
+.path-3 .film-frame.frame-5 { animation-delay: 2.35s; }
+.path-3 .film-hole { animation-delay: 2.4s; }
+
+.path-4 .film-strip { animation-delay: 2.0s; }
+.path-4 .film-frame.frame-1 { animation-delay: 2.25s; }
+.path-4 .film-frame.frame-2 { animation-delay: 2.3s; }
+.path-4 .film-frame.frame-3 { animation-delay: 2.35s; }
+.path-4 .film-frame.frame-4 { animation-delay: 2.4s; }
+.path-4 .film-frame.frame-5 { animation-delay: 2.45s; }
+.path-4 .film-hole { animation-delay: 2.5s; }
+
+.path-5 .film-strip { animation-delay: 2.1s; }
+.path-5 .film-frame.frame-1 { animation-delay: 2.35s; }
+.path-5 .film-frame.frame-2 { animation-delay: 2.4s; }
+.path-5 .film-frame.frame-3 { animation-delay: 2.45s; }
+.path-5 .film-frame.frame-4 { animation-delay: 2.5s; }
+.path-5 .film-frame.frame-5 { animation-delay: 2.55s; }
+.path-5 .film-hole { animation-delay: 2.6s; }
+
+.path-6 .film-strip { animation-delay: 2.2s; }
+.path-6 .film-frame.frame-1 { animation-delay: 2.45s; }
+.path-6 .film-frame.frame-2 { animation-delay: 2.5s; }
+.path-6 .film-frame.frame-3 { animation-delay: 2.55s; }
+.path-6 .film-frame.frame-4 { animation-delay: 2.6s; }
+.path-6 .film-frame.frame-5 { animation-delay: 2.65s; }
+.path-6 .film-hole { animation-delay: 2.7s; }
+
+.path-7 .film-strip { animation-delay: 2.3s; }
+.path-7 .film-frame.frame-1 { animation-delay: 2.55s; }
+.path-7 .film-frame.frame-2 { animation-delay: 2.6s; }
+.path-7 .film-frame.frame-3 { animation-delay: 2.65s; }
+.path-7 .film-frame.frame-4 { animation-delay: 2.7s; }
+.path-7 .film-frame.frame-5 { animation-delay: 2.75s; }
+.path-7 .film-hole { animation-delay: 2.8s; }
+
+.path-8 .film-strip { animation-delay: 2.4s; }
+.path-8 .film-frame.frame-1 { animation-delay: 2.65s; }
+.path-8 .film-frame.frame-2 { animation-delay: 2.7s; }
+.path-8 .film-frame.frame-3 { animation-delay: 2.75s; }
+.path-8 .film-frame.frame-4 { animation-delay: 2.8s; }
+.path-8 .film-frame.frame-5 { animation-delay: 2.85s; }
+.path-8 .film-hole { animation-delay: 2.9s; }
+
+@keyframes filmAppear {
     to {
         opacity: 1;
-        filter: drop-shadow(0 0 5px var(--primary-color));
+    }
+}
+
+@keyframes frameFill {
+    0% {
+        opacity: 0;
+        fill: rgba(14, 165, 233, 0.1);
+    }
+    100% {
+        opacity: 1;
+        fill: rgba(14, 165, 233, 0.4);
+    }
+}
+
+@keyframes holeGlow {
+    to {
+        opacity: 0.8;
+        filter: drop-shadow(0 0 2px var(--primary-color));
+    }
+}
+
+/* Motion Paths */
+.motion-path {
+    fill: none;
+    stroke: var(--primary-color);
+    stroke-width: 2;
+    opacity: 0.5;
+}
+
+.path-1 .motion-path { animation: drawPath 1.2s ease-out forwards 0.3s; }
+.path-2 .motion-path { animation: drawPath 1.3s ease-out forwards 0.4s; }
+.path-3 .motion-path { animation: drawPath 1.0s ease-out forwards 0.5s; }
+.path-4 .motion-path { animation: drawPath 1.2s ease-out forwards 0.6s; }
+.path-5 .motion-path { animation: drawPath 1.0s ease-out forwards 0.7s; }
+.path-6 .motion-path { animation: drawPath 1.3s ease-out forwards 0.8s; }
+.path-7 .motion-path { animation: drawPath 1.0s ease-out forwards 0.9s; }
+.path-8 .motion-path { animation: drawPath 1.2s ease-out forwards 1.0s; }
+
+@keyframes drawPath {
+    to {
+        stroke-dashoffset: 0;
+        opacity: 0.8;
+    }
+}
+
+/* Keyframe Dots */
+.keyframe-dot {
+    fill: #00ffff;
+    opacity: 0;
+    filter: drop-shadow(0 0 4px #00ffff);
+}
+
+.path-1 .keyframe-dot { animation: keyframePulse 0.5s ease-out forwards 0.5s; }
+.path-2 .keyframe-dot { animation: keyframePulse 0.5s ease-out forwards 0.6s; }
+.path-3 .keyframe-dot { animation: keyframePulse 0.5s ease-out forwards 0.7s; }
+.path-4 .keyframe-dot { animation: keyframePulse 0.5s ease-out forwards 0.8s; }
+.path-5 .keyframe-dot { animation: keyframePulse 0.5s ease-out forwards 0.9s; }
+.path-6 .keyframe-dot { animation: keyframePulse 0.5s ease-out forwards 1.0s; }
+.path-7 .keyframe-dot { animation: keyframePulse 0.5s ease-out forwards 1.1s; }
+.path-8 .keyframe-dot { animation: keyframePulse 0.5s ease-out forwards 1.2s; }
+
+@keyframes keyframePulse {
+    to {
+        opacity: 1;
     }
 }
 

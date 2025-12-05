@@ -1,8 +1,0 @@
-/* Ripple effect animation */
-@keyframes ripple {
-    to {
-        width: 400px;
-        height: 400px;
-        opacity: 0;
-    }
-}
