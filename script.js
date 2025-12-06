@@ -360,7 +360,7 @@ const showreelVideo = document.querySelector('.video-wrapper iframe');
 // You can add custom video player controls here if using HTML5 video instead of iframe
 
 // =====================================
-// CURSOR EFFECTS (Optional)
+// CURSOR EFFECTS
 // =====================================
 const cursor = document.createElement('div');
 cursor.className = 'custom-cursor';
@@ -380,17 +380,29 @@ function animateCursor() {
     const dx = mouseX - cursorX;
     const dy = mouseY - cursorY;
     
-    cursorX += dx * 0.1;
-    cursorY += dy * 0.1;
+    // Smooth follow with lag
+    cursorX += dx * 0.15;
+    cursorY += dy * 0.15;
     
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top = cursorY + 'px';
+    // Use transform3d for hardware acceleration
+    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
     
     requestAnimationFrame(animateCursor);
 }
 
-// Uncomment to enable custom cursor
-// animateCursor();
+animateCursor();
+
+// Hover interactions for cursor
+const hoverElements = document.querySelectorAll('a, button, .portfolio-item, .skill-item, input, textarea');
+
+hoverElements.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        cursor.classList.add('hovered');
+    });
+    el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('hovered');
+    });
+});
 
 // =====================================
 // PORTFOLIO FILTER (Optional)

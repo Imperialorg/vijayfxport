@@ -63,6 +63,40 @@ body {
     50% { opacity: 0.5; }
 }
 
+/* =====================================
+   CINEMATIC OVERLAYS
+   ===================================== */
+.cinematic-vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    background: radial-gradient(circle, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%);
+}
+
+.cinematic-grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 99;
+    opacity: 0.03;
+    /* Lightweight noise pattern instead of heavy SVG filter */
+    background-image: url("https://cdnjs.cloudflare.com/ajax/libs/media-element/4.2.16/noise.png");
+    animation: grainPulse 0.2s steps(4) infinite;
+    will-change: transform;
+}
+
+@keyframes grainPulse {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-10px, -10px); }
+}
+
 /* Ensure content is above background */
 nav, section, footer {
     position: relative;
@@ -698,9 +732,10 @@ nav, section, footer {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(3rem, 10vw, 8rem);
     line-height: 0.9;
-    letter-spacing: 5px;
+    letter-spacing: 10px; /* Cinematic wide tracking */
     margin-bottom: 1rem;
     overflow: hidden;
+    text-shadow: 0 0 20px rgba(14, 165, 233, 0.5); /* Cinematic glow */
 }
 
 .hero-title .line {
@@ -1142,10 +1177,23 @@ section {
     position: relative;
 }
 
+/* Cinematic Color Grade for Images */
+.image-frame img,
+.portfolio-thumbnail img {
+    filter: contrast(1.1) saturate(1.1) sepia(0.1);
+    transition: transform 0.6s, filter 0.6s;
+}
+
+.image-frame:hover img,
+.portfolio-thumbnail:hover img {
+    filter: contrast(1) saturate(1) sepia(0);
+}
+
 .image-frame {
     position: relative;
     overflow: hidden;
     border: 3px solid var(--primary-color);
+    box-shadow: 0 0 30px rgba(14, 165, 233, 0.2);
 }
 
 .image-frame img {
@@ -1772,16 +1820,53 @@ section {
     transform: translateY(0);
 }
 
-/* Ripple effect animation */
-@keyframes ripple {
-    to {
-        width: 400px;
-        height: 400px;
-        opacity: 0;
-    }
+/* =====================================
+   CUSTOM CURSOR
+   ===================================== */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--primary-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s;
+    mix-blend-mode: difference;
+    will-change: transform, width, height; /* Optimize performance */
 }
 
-/* Smooth transitions */
+.custom-cursor::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.custom-cursor.hovered {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(14, 165, 233, 0.1);
+    border-color: var(--light-text);
+}
+
+/* Hide default cursor when custom cursor is active (handled via body class in JS ideally, but simple reset here) */
+body {
+    cursor: none; 
+}
+
+/* Restore cursor for iframes/embeds if needed */
+iframe {
+    pointer-events: auto;
+}
 * {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
