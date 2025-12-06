@@ -381,8 +381,10 @@ function animateCursor() {
     const dy = mouseY - cursorY;
     
     // Smooth follow with lag
-    cursorX += dx * 0.15;
-    cursorY += dy * 0.15;
+    // Smooth follow effect - higher number = faster (1 = instant, 0.1 = very slow/laggy)
+    // Changed from 0.15 to 0.5 for faster response
+    cursorX += dx * 0.5;
+    cursorY += dy * 0.5;
     
     // Use transform3d for hardware acceleration
     cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
