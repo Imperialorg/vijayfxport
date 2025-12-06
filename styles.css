@@ -88,7 +88,8 @@ body {
     opacity: 0.03;
     /* Lightweight noise pattern instead of heavy SVG filter */
     background-image: url("https://cdnjs.cloudflare.com/ajax/libs/media-element/4.2.16/noise.png");
-    animation: grainPulse 0.2s steps(4) infinite;
+    /* Animation removed for performance */
+    /* animation: grainPulse 0.2s steps(4) infinite; */
     will-change: transform;
 }
 
@@ -735,7 +736,7 @@ nav, section, footer {
     letter-spacing: 10px; /* Cinematic wide tracking */
     margin-bottom: 1rem;
     overflow: hidden;
-    text-shadow: 0 0 20px rgba(14, 165, 233, 0.5); /* Cinematic glow */
+    text-shadow: 0 0 10px rgba(14, 165, 233, 0.5); /* Reduced glow for performance */
 }
 
 .hero-title .line {
@@ -1835,7 +1836,8 @@ section {
     z-index: 9999;
     transform: translate(-50%, -50%);
     transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s;
-    mix-blend-mode: difference;
+    mix-blend-mode: normal;
+    opacity: 0.8;
     will-change: transform, width, height; /* Optimize performance */
 }
 

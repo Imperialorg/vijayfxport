@@ -61,7 +61,7 @@ class Particle {
 }
 
 const particles = [];
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 25; i++) {
     particles.push(new Particle());
 }
 
