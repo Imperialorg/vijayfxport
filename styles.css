@@ -134,21 +134,49 @@ nav, section, footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .circuit-board {
-    width: 100%;
-    max-width: 800px;
+    width: 90vw;
+    max-width: 700px;
     height: auto;
     filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.3));
 }
 
 /* Camera Lens Styling */
+.lens-ring-outer3 {
+    animation: ringRotate 20s linear infinite;
+    transform-origin: 400px 300px;
+}
+
+.lens-ring-outer2 {
+    animation: lensGlow 2s ease-in-out infinite 0.2s;
+}
+
 .lens-outer {
     stroke: var(--primary-color);
     animation: lensGlow 2s ease-in-out infinite;
     filter: drop-shadow(0 0 8px var(--primary-color));
+}
+
+.tech-ring {
+    animation: ringRotate 8s linear infinite reverse;
+    transform-origin: 400px 300px;
+}
+
+@keyframes ringRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.lens-brackets path {
+    opacity: 0;
+    animation: bracketFadeIn 0.5s ease-out forwards 0.8s;
+}
+
+@keyframes bracketFadeIn {
+    to { opacity: 1; }
 }
 
 @keyframes lensGlow {
@@ -186,12 +214,14 @@ nav, section, footer {
     transform-origin: 400px 300px;
 }
 
-.blade-1 { animation-delay: 0.5s; }
-.blade-2 { animation-delay: 0.6s; }
-.blade-3 { animation-delay: 0.7s; }
-.blade-4 { animation-delay: 0.8s; }
-.blade-5 { animation-delay: 0.9s; }
-.blade-6 { animation-delay: 1s; }
+.blade-1 { animation-delay: 0.4s; }
+.blade-2 { animation-delay: 0.45s; }
+.blade-3 { animation-delay: 0.5s; }
+.blade-4 { animation-delay: 0.55s; }
+.blade-5 { animation-delay: 0.6s; }
+.blade-6 { animation-delay: 0.65s; }
+.blade-7 { animation-delay: 0.7s; }
+.blade-8 { animation-delay: 0.75s; }
 
 @keyframes bladeOpen {
     0% {
@@ -207,39 +237,66 @@ nav, section, footer {
     }
 }
 
+.lens-glow {
+    opacity: 0;
+    animation: glowPulse 2s ease-in-out infinite 1s;
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
 .lens-center {
-    fill: rgba(0, 255, 255, 0.1);
+    fill: rgba(0, 255, 255, 0.15);
     animation: centerPulse 2s ease-in-out infinite 1.2s;
+}
+
+.lens-inner {
+    animation: innerRingPulse 1.5s ease-in-out infinite 1.3s;
+}
+
+@keyframes innerRingPulse {
+    0%, 100% { opacity: 0.3; r: 45; }
+    50% { opacity: 0.7; r: 47; }
 }
 
 @keyframes centerPulse {
     0%, 100% { 
-        fill: rgba(0, 255, 255, 0.1);
-        r: 28;
+        fill: rgba(0, 255, 255, 0.15);
+        r: 50;
     }
     50% { 
-        fill: rgba(0, 255, 255, 0.3);
-        r: 30;
+        fill: rgba(0, 255, 255, 0.35);
+        r: 52;
     }
 }
 
 /* Light Rays */
 .light-rays {
     transform-origin: 400px 300px;
+    animation: raysRotate 4s linear infinite 2s;
+}
+
+@keyframes raysRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .light-ray {
     stroke: #00ffff;
     stroke-width: 2;
-    filter: drop-shadow(0 0 3px #00ffff);
+    filter: drop-shadow(0 0 5px #00ffff);
 }
 
-.ray-1 { animation: rayBurst 0.8s ease-out forwards 1.8s; }
-.ray-2 { animation: rayBurst 0.8s ease-out forwards 1.85s; }
-.ray-3 { animation: rayBurst 0.8s ease-out forwards 1.9s; }
-.ray-4 { animation: rayBurst 0.8s ease-out forwards 1.95s; }
-.ray-5 { animation: rayBurst 0.8s ease-out forwards 2s; }
-.ray-6 { animation: rayBurst 0.8s ease-out forwards 2.05s; }
+.ray-1 { animation: rayBurst 0.8s ease-out forwards 1.6s; }
+.ray-2 { animation: rayBurst 0.8s ease-out forwards 1.65s; }
+.ray-3 { animation: rayBurst 0.8s ease-out forwards 1.7s; }
+.ray-4 { animation: rayBurst 0.8s ease-out forwards 1.75s; }
+.ray-5 { animation: rayBurst 0.8s ease-out forwards 1.8s; }
+.ray-6 { animation: rayBurst 0.8s ease-out forwards 1.85s; }
+.ray-7 { animation: rayBurst 0.8s ease-out forwards 1.9s; }
+.ray-8 { animation: rayBurst 0.8s ease-out forwards 1.95s; }
 
 @keyframes rayBurst {
     0% {
@@ -259,12 +316,13 @@ nav, section, footer {
 .lens-text {
     fill: var(--primary-color);
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
+    font-size: 32px;
     text-anchor: middle;
-    dominant-baseline: middle;
-    letter-spacing: 3px;
+    dominant-baseline: central;
+    letter-spacing: 6px;
     opacity: 0;
-    animation: textFadeIn 0.5s ease-out forwards 1.5s;
+    animation: textFadeIn 0.5s ease-out forwards 1.3s;
+    filter: drop-shadow(0 0 10px var(--primary-color)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.5));
 }
 
 @keyframes textFadeIn {
